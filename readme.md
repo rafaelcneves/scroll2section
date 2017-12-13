@@ -1,14 +1,20 @@
-# youCover
+# scroll2Section
 
-jQuery plugin to wrap default YouTube Player to image cover
+jQuery plugin to scroll page
 
-## Getting Started
+## Usage
 
-Copy the (youCover) js and css files locate in dist folder into your project
-See examples:
-http://dialogo.digital/public/projects/youCover/example/
+Simple to use:
 
-*** View all examples in example/index.html
+$(selector).scroll2Section({options});
+selector can be one or more elements
+    options: 
+        menu: #menu,#submenu, ... //selector of menu
+        offSetTop:0,              // page offset top
+        activeClass:'active',     // class to active menu link
+        activeParent:'li'         // parent closest of menu link
+
+*** See an example into a example directory
 
 ### Prerequisites
 
