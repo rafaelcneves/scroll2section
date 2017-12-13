@@ -1,0 +1,47 @@
+{
+  "name": "scroll2section",
+  "version": "1.0.0",
+  "description": "jQuery plugin to scroll to section from menu",
+  "homepage": "https://github.com/kiaonline/scroll2Section",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiaonline/scroll2Section.git"
+  },
+  "keywords": [
+    "section",
+    "scroll",
+    "menu",
+    "scroll"
+  ],
+  "author": "kiaonline",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.22.0",
+    "browser-sync": "^2.18.6",
+    "browserify": "^13.3.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-cached": "^1.1.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-concat-util": "^0.5.5",
+    "gulp-header": "^1.8.9",
+    "gulp-jshint": "^2.0.4",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0",
+    "gulp-watch": "^4.3.11",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1",
+    "map-stream": "0.0.7",
+    "uglify-js-harmony": "^2.6.2"
+  },
+  "main": "gulpfile.js",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {}
+}
