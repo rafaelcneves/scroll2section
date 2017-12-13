@@ -7,7 +7,9 @@ jQuery plugin to scroll page
 Simple to use:
 
 $(selector).scroll2Section({options});
+
 selector can be one or more elements
+
     options: 
         menu: #menu,#submenu, ... //selector of menu
         offSetTop:0,              // page offset top
