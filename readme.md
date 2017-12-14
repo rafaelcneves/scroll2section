@@ -16,6 +16,9 @@ selector can be one or more elements
         activeClass:'active',     // class to active menu link
         activeParent:'li'         // parent closest of menu link
 
+See examples:
+http://dialogo.digital/public/projects/scroll2section/
+
 *** See an example into a example directory
 
 ### Prerequisites
