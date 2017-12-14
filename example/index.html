@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<title>scroll2Section</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="vendors/bootstrap.css">
+		<link rel="stylesheet" href="vendors/bootstrap.min.css">
 		
 		<style>
 		body{
@@ -93,10 +93,10 @@
 				<div class="container">
 						<nav class="navbar navbar-expand-md navbar-dark fixed-bottom bg-dark">
 							
-							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse2" aria-controls="navbarCollapse2" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="navbar-toggler-icon"></span>
 							</button>
-							<div class="collapse navbar-collapse" id="navbarCollapse">
+							<div class="collapse navbar-collapse" id="navbarCollapse2">
 								<ul class="navbar-nav mr-auto">
 									<li class="nav-item active">
 										<a class="nav-link" data-section href="#!section-1">Section 1</a>
@@ -119,12 +119,14 @@
 						</nav>
 				</div>
 			</div>
-		</header>
+		</footer>
 
 	</body>
 	<script src="vendors/jquery.min.js"></script>
+	<script src="vendors/popper.min.js"></script>
+	<script src="vendors/bootstrap.min.js"></script>
 	<script src='../dist/scroll2Section.js'></script>
 	<script>
-		$("section").scroll2Section({menu:'header nav, footer nav',offsetTop:55});
+		$("section").scroll2Section({menu:'header nav, footer nav',offsetTop:56});
 	</script>
 </html>

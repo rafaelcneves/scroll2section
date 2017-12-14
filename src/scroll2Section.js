@@ -46,7 +46,7 @@
         var fc                  = $section.get(0);
         offsetTopSection        = $(fc).position().top;
         offSetTop               = offSetTop || offsetTopSection;
-
+        
         $section.each(function () {
             var $self               = $(this),
                 offsetCoords        = $self.offset(),
@@ -54,6 +54,7 @@
             $window.scroll(function () {
                 if (($window.scrollTop()+offSetTop) > $self.offset().top && $self.offset().top + $self.height() > $window.scrollTop() && changeHash) {
                     var id          = $self.attr('id');
+                    console.log('scrolling... : ' + id);
                     var inMenu      = inMenuItems(id);
                     if(!id.length || currentHash === "#!" + id || !inMenu) return true;
                     currentHash     = "#!" + id;
@@ -93,11 +94,13 @@
                 var dp          = $target.attr('data-padding') || 0;
                 var dm          = $target.offset().top - parseInt(dp) - offSetTop;
                 changeHash      = false;
+                $('body').addClass('scrolling');
                 // trigger scroll
                 $('html, body').stop().animate({
                     'scrollTop': dm
-                }, 1000, function () {
+                }, options.duration, function () {
                     var hash = "#!"  + id;
+                    $('body').removeClass('scrolling');
                     if (window.history && window.history.pushState) {
                         history.pushState("", document.title, hash);
                         activateMenuItem(id);
@@ -136,7 +139,7 @@
         return new scroll2Section(this,options);
         
     };
-    $.fn.scroll2Section.options = {menu:"#menu,#submenu",offSetTop:0,activeClass:'active',activeParent:'li'};
+    $.fn.scroll2Section.options = {menu:"#menu,#submenu",offSetTop:0,activeClass:'active',activeParent:'li',duration:1000};
     
 
 }( jQuery ));
