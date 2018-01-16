@@ -22,8 +22,9 @@ http://dialogo.digital/public/projects/scroll2section/
 *** See an example into a example directory
 ### Versions
 
-changes
-1.1 - Use one selector to menu
+Version 1.1
+
+    - Use one selector to menu
     - return menu element
     - bind update event
     - use navfix class to calculate section position
