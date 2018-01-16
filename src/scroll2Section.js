@@ -1,11 +1,11 @@
 /** ==================================================
- * scroll2section v.alpha
+ * scroll2section 1.0
  * Licensed GPLv3 for open source use
  * example:
  * $(selector).scroll2Section({options});
  * selector can be one or more elements
  * options: 
- *          menu: #menu,#submenu, ... //selector of menu
+ *          menu: #menu,                //selector of menu [unique selector]
  *          offSetTop:0,              // page offset top
  *          activeClass:'active',     // class to active menu link
  *          activeParent:'li'         // parent closest of menu link
@@ -21,7 +21,7 @@
         //scroll to section
         var $window             = $(window);
         var $section            = $(el);
-        var offSetTop           = options.offSetTop || null;
+        var offSetTop           = options.offsetTop || 0;
         var changeHash          = true;
         var $menu               = $(options.menu),
             $menuItem           = $menu.find("a[data-section]");
@@ -31,7 +31,9 @@
         var scrollPos           = $(document).scrollTop();
         var tempScrollTop,
             currentScrollTop    = $window.scrollTop();
-        
+        //if body has navfix class, the scroll will check the 
+        var hasNavFix           = $('body').hasClass('navfix');
+
         //push menu items to array for section controller
         $menuItem.each(function(){
             var href = $(this).attr("href").replace("#!", "");
@@ -41,20 +43,18 @@
         function inMenuItems(item){
             return (menuItems.indexOf(item)!=-1);
         }
-        
-        var offsetTopSection;
-        var fc                  = $section.get(0);
-        offsetTopSection        = $(fc).position().top;
-        offSetTop               = offSetTop || offsetTopSection;
-        
+       
+                
         $section.each(function () {
-            var $self               = $(this),
-                offsetCoords        = $self.offset(),
-                topOffset           = offsetCoords.top;
+            var $self                   = $(this);
             $window.scroll(function () {
-                if (($window.scrollTop()+offSetTop) > $self.offset().top && $self.offset().top + $self.height() > $window.scrollTop() && changeHash) {
+                var offsetCoords        = $self.offset(),
+                    sectionOffsetTop    = offsetCoords.top;
+                    if(hasNavFix){
+                        offSetTop = $menu.outerHeight();
+                    }
+                if ((($window.scrollTop() + offSetTop) >= $self.offset().top) && (($self.offset().top + $self.height() - offSetTop) > $window.scrollTop()) && changeHash) {
                     var id          = $self.attr('id');
-                    console.log('scrolling... : ' + id);
                     var inMenu      = inMenuItems(id);
                     if(!id.length || currentHash === "#!" + id || !inMenu) return true;
                     currentHash     = "#!" + id;
@@ -76,16 +76,16 @@
             $this.closest(options.activeParent).addClass(options.activeClass);
             activateMenuItem(id);
             scrollToAnchor(id);
-
             e.preventDefault();
             return false;
         });
 
         function activateMenuItem(id){
             var active = $menuItem.filter("[href='#!" + id  + "']");
-            
             $menuItem.not(active).closest(options.activeParent).removeClass(options.activeClass);
             active.closest(options.activeParent).addClass(options.activeClass);
+            $menu.trigger('update',active);
+            changeHash = true;
         }
 
         function scrollToAnchor(id){
@@ -113,12 +113,13 @@
         if(window.location.hash){
             currentHash = window.location.hash.clearHash();
             $menuItem.filter("[href='#!" + currentHash  + "']").trigger('click');
+            changeHash = false;
         }
 
         //check mobile and use default iframe and remove autoplay options if instantiated
      
        
-        return $section;
+        return $menu;
     };
 
     String.prototype.clearHash = function(str){
@@ -139,7 +140,7 @@
         return new scroll2Section(this,options);
         
     };
-    $.fn.scroll2Section.options = {menu:"#menu,#submenu",offSetTop:0,activeClass:'active',activeParent:'li',duration:1000};
+    $.fn.scroll2Section.options = {menu:"#menu",offSetTop:0,activeClass:'active',activeParent:'li',duration:1000};
     
 
 }( jQuery ));

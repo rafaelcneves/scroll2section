@@ -33,7 +33,7 @@
 		
 		</style>
 	</head>
-	<body>
+	<body class='navfix'>
 
 		<header>
 			<div class="blog-masthead">
@@ -121,12 +121,19 @@
 			</div>
 		</footer>
 
-	</body>
+	
 	<script src="vendors/jquery.min.js"></script>
 	<script src="vendors/popper.min.js"></script>
 	<script src="vendors/bootstrap.min.js"></script>
 	<script src='../dist/scroll2Section.js'></script>
 	<script>
-		$("section").scroll2Section({menu:'header nav, footer nav',offsetTop:56});
+		var navFooter = $("footer nav a[data-section]");
+		$("section").scroll2Section({menu:'header nav',offsetTop:56}).on('update',function(event,element){
+			var href = $(element).attr('href');
+			$(navFooter).parent().removeClass('active');
+			$(navFooter).filter("[href='" + href  + "']").parent().addClass('active');
+		});
 	</script>
+	
+	</body>
 </html>
