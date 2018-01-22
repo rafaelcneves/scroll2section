@@ -5,7 +5,7 @@
  * $(selector).scroll2Section({options});
  * selector can be one or more elements
  * options: 
- *          menu: #menu,                //selector of menu [unique selector]
+ *          menu: #menu,               //selector of menu [unique selector]
  *          offSetTop:0,              // page offset top
  *          activeClass:'active',     // class to active menu link
  *          activeParent:'li'         // parent closest of menu link
