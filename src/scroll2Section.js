@@ -36,7 +36,7 @@
 
         //push menu items to array for section controller
         $menuItem.each(function(){
-            var href = $(this).attr("href").replace("#!", "");
+            var href = $(this).attr('href').toString().str2Hash().clearHash();
             menuItems.push(href);
         });
 
@@ -70,18 +70,21 @@
 
         $menuItem.click(function(e){
             changeHash  = false;
+            
             var $this   = $(this),
-                id      = $this.attr("href").clearHash();
+            id      = $this.attr("href").str2Hash().clearHash();
+            
             if(!id) return true;
             $this.closest(options.activeParent).addClass(options.activeClass);
             activateMenuItem(id);
             scrollToAnchor(id);
             e.preventDefault();
+            
             return false;
         });
 
         function activateMenuItem(id){
-            var active = $menuItem.filter("[href='#!" + id  + "']");
+            var active = $menuItem.filter("[href$='#!" + id  + "']");
             $menuItem.not(active).closest(options.activeParent).removeClass(options.activeClass);
             active.closest(options.activeParent).addClass(options.activeClass);
             $menu.trigger('update',active);
@@ -112,7 +115,8 @@
 
         if(window.location.hash){
             currentHash = window.location.hash.clearHash();
-            $menuItem.filter("[href='#!" + currentHash  + "']").trigger('click');
+            var menuItemActive = $menuItem.filter("[href$='#!" + currentHash  + "']");
+            if(menuItemActive.length==1) menuItemActive.trigger('click');
             changeHash = false;
         }
 
@@ -124,6 +128,13 @@
 
     String.prototype.clearHash = function(str){
         return this.replace("#!",'');
+    };
+
+    String.prototype.str2Hash = function(str){
+        var s = this.indexOf("#!");
+        if(s ==-1 ) return this;
+        var l = this.length;
+        return this.slice(s, l); 
     };
 
     /**
