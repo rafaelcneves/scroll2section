@@ -32,7 +32,7 @@
         var tempScrollTop,
             currentScrollTop    = $window.scrollTop();
         //if body has navfix class, the scroll will check the 
-        var hasNavFix           = $('body').hasClass('navfix');
+        var isAffix           = $('body').hasClass('affix');
 
         //push menu items to array for section controller
         $menuItem.each(function(){
@@ -50,7 +50,7 @@
             $window.scroll(function () {
                 var offsetCoords        = $self.offset(),
                     sectionOffsetTop    = offsetCoords.top;
-                    if(hasNavFix){
+                    if(isAffix){
                         offSetTop = $menu.outerHeight();
                     }
                 if ((($window.scrollTop() + offSetTop) >= $self.offset().top) && (($self.offset().top + $self.height() - offSetTop) > $window.scrollTop()) && changeHash) {
@@ -58,6 +58,7 @@
                     var inMenu      = inMenuItems(id);
                     if(!id.length || currentHash === "#!" + id || !inMenu) return true;
                     currentHash     = "#!" + id;
+                    $('body').trigger('visibleSection',id);
                     activateMenuItem(id);
                     if (window.history && window.history.pushState) {
                         history.pushState("", document.title, currentHash);
