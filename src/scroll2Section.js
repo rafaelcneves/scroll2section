@@ -4,7 +4,7 @@
  * example:
  * $(selector).scroll2Section({options});
  * selector can be one or more elements
- * options: 
+ * options:
  *          menu: #menu,               //selector of menu [unique selector]
  *          offSetTop:0,              // page offset top
  *          activeClass:'active',     // class to active menu link
@@ -16,7 +16,7 @@
         var smallScreen = (window.matchMedia('(max-width: 767px)').matches);
         var is_mobile   = (/Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent));
         var $el         = $(el), data = $el.data();
-        
+
 
         //scroll to section
         var $window             = $(window);
@@ -31,7 +31,7 @@
         var scrollPos           = $(document).scrollTop();
         var tempScrollTop,
             currentScrollTop    = $window.scrollTop();
-        //if body has navfix class, the scroll will check the 
+        //if body has navfix class, the scroll will check the
         var isAffix           = $('body').hasClass('affix');
 
         //push menu items to array for section controller
@@ -43,8 +43,8 @@
         function inMenuItems(item){
             return (menuItems.indexOf(item)!=-1);
         }
-       
-                
+
+
         $section.each(function () {
             var $self                   = $(this);
             $window.scroll(function () {
@@ -67,20 +67,20 @@
             });
         });
 
-        
+
 
         $menuItem.click(function(e){
             changeHash  = false;
-            
+
             var $this   = $(this),
             id      = $this.attr("href").str2Hash().clearHash();
-            
+
             if(!id) return true;
             $this.closest(options.activeParent).addClass(options.activeClass);
             activateMenuItem(id);
             scrollToAnchor(id);
             e.preventDefault();
-            
+
             return false;
         });
 
@@ -105,6 +105,7 @@
                 }, options.duration, function () {
                     var hash = "#!"  + id;
                     $('body').removeClass('scrolling');
+                    $('body').trigger('afterScolling',id);
                     if (window.history && window.history.pushState) {
                         history.pushState("", document.title, hash);
                         activateMenuItem(id);
@@ -122,8 +123,8 @@
         }
 
         //check mobile and use default iframe and remove autoplay options if instantiated
-     
-       
+
+
         return $menu;
     };
 
@@ -135,24 +136,24 @@
         var s = this.indexOf("#!");
         if(s ==-1 ) return this;
         var l = this.length;
-        return this.slice(s, l); 
+        return this.slice(s, l);
     };
 
     /**
-     * @example 
+     * @example
      * $(section)
-     * 
+     *
      * @param   {Object} [opcional]    Opcional
      * @returns {Number}
      */
     $.fn.scroll2Section = function(options) {
         options = $.extend( {}, $.fn.scroll2Section.options, options );
-        
+
         if($(this).hasClass('loaded')) return this;
         return new scroll2Section(this,options);
-        
+
     };
     $.fn.scroll2Section.options = {menu:"#menu",offSetTop:0,activeClass:'active',activeParent:'li',duration:1000};
-    
+
 
 }( jQuery ));
