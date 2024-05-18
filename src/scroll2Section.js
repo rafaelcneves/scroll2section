@@ -105,7 +105,7 @@
                 }, options.duration, function () {
                     var hash = "#!"  + id;
                     $('body').removeClass('scrolling');
-                    $('body').trigger('afterScolling',id);
+                    $('body').trigger('afterScrolling',id);
                     if (window.history && window.history.pushState) {
                         history.pushState("", document.title, hash);
                         activateMenuItem(id);
